@@ -1,0 +1,86 @@
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Raport.h"
+#include "Programare.h"
+#include <DateUtils.hpp>
+
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+
+__fastcall TRaport_Form::TRaport_Form(TComponent* Owner)
+	: TForm(Owner) {
+}
+
+void __fastcall TRaport_Form::FormActivate(TObject *Sender) {
+	Lista->Clear();
+	Titlu->Caption = "Introduceti intervalul: ";
+	Read->Visible = true;
+	Inceput_Date->Date = Now();
+	Sfarsit_Date->Date = Now();
+	Raport_Form->ClientHeight = 120;
+	Lista->Visible = false;
+	Afisare->Visible = true;
+	Anuleaza->Top = 80;
+	Anuleaza->Left = 360;
+	Afiseaza->Top = 80;
+	Afiseaza->Left = 460;
+	Raport->Active = false;
+	Raport->Active = true;
+}
+
+void __fastcall TRaport_Form::AnuleazaClick(TObject *Sender) {
+	Raport_Form->Close();
+}
+
+void __fastcall TRaport_Form::AfisareClick(TObject *Sender){
+	String Data_Inceput = Inceput_Date->DateTime;
+	String Data_Sfarsit = Sfarsit_Date->DateTime;
+	Raport_Form->ClientHeight = 500;
+	Read->Visible = false;
+	Titlu->Caption = "Lista locurilor libere pentru programre:";
+	Afisare->Visible = false;
+	Anuleaza->Top = 460;
+	Anuleaza->Left = 390;
+	Lista->Visible = true;
+
+
+
+	Raport->Sort = "DATA";
+
+	Raport->First();
+	while (!Raport->Eof)  {
+		if (StrToDateTime(Data_Inceput) > StrToDateTime(Data_Sfarsit)) {
+			if (StrToDateTime(Data_Inceput) <= Raport->Fields->Fields[0]->AsDateTime &&
+					Raport->Fields->Fields[0]->AsDateTime <= StrToDateTime(Data_Sfarsit)) {
+				String Item = "Data: " + Raport->Fields->Fields[0]->AsString + " \n" + "   " +
+				Raport->Fields->Fields[1]->AsString + " - " + Raport->Fields->Fields[2]->AsString +
+				IntToStr(HoursBetween(StrToTime(Raport->Fields->Fields[1]->AsString),Raport->Fields->Fields[2]->AsString)) +"h " +
+				IntToStr(MinutesBetween(StrToTime(Raport->Fields->Fields[1]->AsString),Raport->Fields->Fields[2]->AsString) -
+				HoursBetween(StrToTime(Raport->Fields->Fields[1]->AsString),Raport->Fields->Fields[2]->AsString) * 60) + "min \n" +
+				"   Nr pacienti: " + Raport->Fields->Fields[4]->AsString + " \n" +
+				"   Suma: " + Raport->Fields->Fields[5]->AsString + " \n\n";
+				int index = Lista->Items->IndexOf(Item);
+				if (index == -1) {
+				   Lista->Items->Add(Item);
+				}
+
+			}
+		}
+		Raport->Next();
+	}
+
+	TStringList *stringList = new TStringList;
+	stringList->Assign(Lista->Items);
+	stringList->Sort();
+
+	Lista->Items->Clear();
+
+	for (int i = 0; i < stringList->Count; i++) {
+		Lista->Items->Add(stringList->Strings[i]);
+	}
+
+	delete stringList;
+
+}
+

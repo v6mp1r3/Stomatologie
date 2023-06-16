@@ -1,0 +1,34 @@
+#ifndef RaportH
+#define RaportH
+
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Data.DB.hpp>
+#include <Data.Win.ADODB.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+
+class TRaport_Form : public TForm
+{
+__published:
+	TADOTable *OreDeLucru;
+	TADOTable *Pacient;
+	TButton *Afisare;
+	TButton *Anuleaza;
+	TListBox *Lista;
+	TLabel *Titlu;
+	TDateTimePicker *Data_Inceput;
+	TDateTimePicker *Data_Sfarsit;
+	TPanel *Read;
+	TLabel *Inceput;
+	TLabel *Sfarsit;
+private:
+public:
+	__fastcall TRaport_Form(TComponent* Owner);
+};
+
+extern PACKAGE TRaport_Form *Raport_Form;
+
+#endif

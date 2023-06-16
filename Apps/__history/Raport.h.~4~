@@ -1,0 +1,19 @@
+#ifndef RaportH
+#define RaportH
+
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+
+class TRaport_Form : public TForm
+{
+__published:
+private:
+public:
+	__fastcall TRaport_Form(TComponent* Owner);
+};
+
+extern PACKAGE TRaport_Form *Raport_Form;
+
+#endif

@@ -1,0 +1,139 @@
+object Raport_Form: TRaport_Form
+  Left = 0
+  Top = 0
+  Caption = 'Raport'
+  ClientHeight = 500
+  ClientWidth = 510
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OnActivate = FormActivate
+  DesignSize = (
+    510
+    500)
+  TextHeight = 15
+  object Titlu: TLabel
+    Left = 0
+    Top = 0
+    Width = 510
+    Height = 20
+    Align = alTop
+    Caption = 'Lista locurilor libere pentru programre:'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    ExplicitWidth = 267
+  end
+  object Afisare: TButton
+    Left = 390
+    Top = 65
+    Width = 90
+    Height = 27
+    Anchors = [akTop, akRight]
+    Caption = 'Afisare'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+    OnClick = AfisareClick
+    ExplicitLeft = 380
+  end
+  object Anuleaza: TButton
+    Left = 280
+    Top = 65
+    Width = 90
+    Height = 27
+    Anchors = [akTop, akRight]
+    Caption = 'Anulare'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    OnClick = AnuleazaClick
+    ExplicitLeft = 270
+  end
+  object Lista: TListBox
+    Left = 0
+    Top = 65
+    Width = 510
+    Height = 440
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    ItemHeight = 15
+    TabOrder = 2
+    ExplicitWidth = 500
+  end
+  object Read: TPanel
+    Left = 0
+    Top = 20
+    Width = 620
+    Height = 40
+    TabOrder = 3
+    object Inceput: TLabel
+      Left = 10
+      Top = 10
+      Width = 70
+      Height = 17
+      Alignment = taRightJustify
+      Caption = 'De pe: '
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Sfarsit: TLabel
+      Left = 250
+      Top = 10
+      Width = 70
+      Height = 17
+      Alignment = taRightJustify
+      Caption = 'Pana pe: '
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Data_Sfarsit: TDateTimePicker
+      Left = 330
+      Top = 10
+      Width = 150
+      Height = 23
+      Date = 45092.000000000000000000
+      Time = 0.833333333335758700
+      TabOrder = 0
+    end
+    object Data_Inceput: TDateTimePicker
+      Left = 90
+      Top = 10
+      Width = 150
+      Height = 23
+      Date = 45092.000000000000000000
+      Time = 0.333333333335758700
+      TabOrder = 1
+    end
+  end
+  object Raport: TADOTable
+    Connection = FM.DB_Connection
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    TableDirect = True
+    TableName = 'RAPORT'
+    Left = 65520
+    Top = 65520
+  end
+end

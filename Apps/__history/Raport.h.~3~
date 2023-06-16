@@ -1,0 +1,29 @@
+#ifndef RaportH
+#define RaportH
+
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+
+class TRaport_Form : public TForm
+{
+__published:
+    TLabel *Titlu;
+	TEdit *Durata_Edit;
+	TButton *Anuleaza;
+	TButton *Afisare;
+	TListBox *Lista;
+	TADOTable *OreDeLucru;
+	TADOTable *Pacient;
+	void __fastcall FormActivate(TObject *Sender);
+	void __fastcall AnuleazaClick(TObject *Sender);
+	void __fastcall AfisareClick(TObject *Sender);s
+private:
+public:
+	__fastcall TRaport_Form(TComponent* Owner);
+};
+
+extern PACKAGE TRaport_Form *Raport_Form;
+
+#endif
